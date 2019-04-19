@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FillForm</title>
+</head>
+<body>
+    <div class="panel-success panel-body">
+        <h3>Выберите файл для загрузки</h3>
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div id="FilesBlock">
+                <div class="text-center" style="margin:5px">
+                    <input class="upload" type="file" name="uploads" />
+                </div>
+            </div>
+            <label class="addLink btn btn-default">Добавить новый элемент</label>
+            <div class="text-center" style="margin:5px">
+                <input type="submit" value="Загрузить" />
+            </div>
+
+            }
+            @using (Html.BeginForm("MainPage", "Home", FormMethod.Get))
+            {
+                <div class="text-center">
+                    <input type="submit" value="На главную" class="btn btn-success" />
+                </div>
+            }
+            </div>
+    @section Scripts {
+        <script>
+       $(function () {
+           $('.addLink').click(function()
+           {
+               var htmlAdd = "<div class='text-center' style='margin: 5px'> " +
+                   "<input class='upload' type='file' name='uploads'/> </div>";
+               $('#FilesBlock').append(htmlAdd);
+           })
+       })
+        </script>
+    }
+</body>
+</html>
+
