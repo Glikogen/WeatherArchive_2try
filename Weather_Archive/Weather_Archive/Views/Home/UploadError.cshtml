@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "UploadError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>При загрузке произошла ошибка: @ViewBag.Message</h3>
+<br/>
+@using (Html.BeginForm("MainPage", "Home", FormMethod.Get))
+{
+    <div class="text-center">
+        <input type="submit" value="На главную" class="btn btn-success" />
+    </div>
+}
+

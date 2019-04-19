@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "MainPage";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="text-center panel-body panel-success">
+        @using (Html.BeginForm("GetInfo", "Home", FormMethod.Get))
+        {
+            <div class="text-center" style="margin:5px">
+                <input type="submit" value="Посмотреть архивы погодных условий" class="btn btn-success" />
+            </div>
+        }
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Get))
+        {
+            <div class="text-center" style="margin:5px">
+                <input type="submit" value="Загрузить архивы погодных условий" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</body>
+</html>
+

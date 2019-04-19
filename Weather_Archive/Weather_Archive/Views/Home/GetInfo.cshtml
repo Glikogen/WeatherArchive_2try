@@ -1,0 +1,72 @@
+﻿@model Weather_Archive.Models.InfoViewModel
+@using Weather_Archive.Helpers
+
+@{
+    ViewBag.Title = "GetInfo";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetInfo</title>
+
+</head>
+<body>
+    <div class="panel-success panel-body">
+        <h3 class="text-center">Данные загруженных архивов</h3>
+        <table style="padding : 5px" class="table-bordered table">
+            <tr>
+                <td><p>Дата</p></td>
+                <td><p>Время</p></td>
+                <td><p>Температура</p></td>
+                <td><p>Относительная влажность воздуха, %</p></td>
+                <td><p>Точка росы, гр.</p></td>
+                <td><p>Атм. давление, мм рт. ст.</p></td>
+                <td><p>Направление ветра</p></td>
+                <td><p>Скорость ветра, м/с</p></td>
+                <td><p>Облачность, %</p></td>
+                <td><p>Нижняя граница облачности</p></td>
+                <td><p>Горизонтальная видимость, км</p></td>
+                <td><p>Погодные явления</p></td>
+            </tr>
+            @foreach (var data in Model.weather)
+            {
+                <tr>
+                    <td>@data.Date</td>
+                    <td>@data.Time</td>
+                    <td>@data.Temperature</td>
+                    <td>@data.AirHumidity</td>
+                    <td>@data.DewPoint</td>
+                    <td>@data.Pressure</td>
+                    <td>@data.DirectionOfTheWind</td>
+                    <td>@data.WindSpeed</td>
+                    <td>@data.Cloudiness</td>
+                    <td>@data.CloudBase</td>
+                    <td>@data.HorizontalVisibility</td>
+                    <td>@data.WeatherConditions</td>
+                </tr>
+            }
+        </table>
+        <br />
+        <div class="btn-group">
+            @Html.PageLinks(Model.PageInfoYear, y => Url.Action("GetInfo", new { year = y }))
+        </div>
+        <br />
+        <br />
+        <div class="btn-group">
+            @Html.PageLinks(Model.PageInfoMonth, (x, y) => Url.Action("GetInfo", new { page = x, year = y }))
+        </div>
+        <br />
+        <br />
+        @using (Html.BeginForm("MainPage", "Home", FormMethod.Get))
+        {
+            <div class="text-center">
+                <input type="submit" value="На главную" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</body>
+</html>
+
