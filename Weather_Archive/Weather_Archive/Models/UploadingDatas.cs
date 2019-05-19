@@ -14,7 +14,7 @@ namespace Weather_Archive.Models
 {
     public class UploadingDatas
     {
-        public void AddingDatas(string filePath, WeatherDataContext db)
+        public void AddingDatas(string filePath, WeatherDataContext weatherDB)
         {
 
             XSSFWorkbook xssfwb;
@@ -118,8 +118,8 @@ namespace Weather_Archive.Models
                         dataForDB.Add(weather);
                     }
 
-                    db.weatherDatas.AddRange(dataForDB);
-                    db.SaveChanges();
+                    weatherDB.weatherDatas.AddRange(dataForDB);
+                    weatherDB.SaveChanges();
                 }
             }
             catch(Exception)

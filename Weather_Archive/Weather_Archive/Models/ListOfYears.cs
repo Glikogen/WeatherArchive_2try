@@ -14,7 +14,7 @@ namespace Weather_Archive.Models
             int result = 0;
             for (int i = 0; i < year; i++)
             {
-                result += Years[i].GetSkippedRecordsAmount(12);
+                result += Years[i].GetSkippedRecordsAmount(11);
                 result += Years[i].Months[11].RecordsAmount;
             }
 
@@ -30,9 +30,9 @@ namespace Weather_Archive.Models
         public int GetSkippedRecordsAmount(int monthNumber)
         {
             int count = 0;
-            for (int i = 1; i < monthNumber; i++)
+            for (int i = 0; i < monthNumber; i++)
             {
-                count += Months[i - 1].RecordsAmount;
+                count += Months[i].RecordsAmount;
             }
             return count;
         }
@@ -42,5 +42,21 @@ namespace Weather_Archive.Models
     {
         public int MonthNumber { get; set; }
         public int RecordsAmount { get; set; }
+    }
+
+    enum Months
+    {
+        Январь,
+        Февраль,
+        Март,
+        Апрель,
+        Май,
+        Июнь,
+        Июль,
+        Август,
+        Сентябрь,
+        Октябрь,
+        Ноябрь,
+        Декабрь
     }
 }

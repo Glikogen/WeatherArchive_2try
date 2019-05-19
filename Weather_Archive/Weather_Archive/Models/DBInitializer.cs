@@ -13,16 +13,16 @@ namespace Weather_Archive.Models
 {
     public class DBInitializer : DropCreateDatabaseAlways<WeatherDataContext>
     {
-        protected override void Seed(WeatherDataContext db)
+        protected override void Seed(WeatherDataContext dataBase)
         {
             UploadingDatas uploading = new UploadingDatas();
             string FullPath = HostingEnvironment.MapPath("~/ExcelArchive");
             foreach (string filePath in Directory.GetFiles(FullPath))
             {
-                uploading.AddingDatas(filePath, db);
+                uploading.AddingDatas(filePath, dataBase);
             }
 
-            base.Seed(db);
+            base.Seed(dataBase);
         }
     }
 }

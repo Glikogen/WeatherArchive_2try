@@ -195,8 +195,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="ExcelArchive\moskva_2010.xlsx" />
-    <Content Include="ExcelArchive\moskva_2011.xlsx" />
+    <Content Include="ExcelArchive\%28main%29moskva_2010.xlsx" />
+    <Content Include="ExcelArchive\%28main%29moskva_2011.xlsx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

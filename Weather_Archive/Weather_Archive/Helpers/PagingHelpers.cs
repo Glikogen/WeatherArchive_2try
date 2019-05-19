@@ -13,11 +13,11 @@ namespace Weather_Archive.Helpers
         public static MvcHtmlString PageLinks(this HtmlHelper html, PageInfoMonth pageInfoMonth, Func<int, int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
-            for (int i = 1; i <= pageInfoMonth.TotalPages; i++)
+            for (int i = 0; i < pageInfoMonth.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 tag.MergeAttribute("href", pageUrl(i, PageInfoYear.chosenYear));
-                tag.InnerHtml = i.ToString();
+                tag.InnerHtml = ((Months)i).ToString();
                 // если текущая страница, то выделяем ее,
                 // например, добавляя класс
                 if (i == pageInfoMonth.PageNumber)

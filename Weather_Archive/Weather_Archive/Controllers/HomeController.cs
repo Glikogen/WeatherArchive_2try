@@ -14,31 +14,31 @@ namespace Weather_Archive.Controllers
 {
     public class HomeController : Controller
     {
-        WeatherDataContext wdc = new WeatherDataContext();
+        WeatherDataContext weatherDC = new WeatherDataContext();
 
         public ActionResult MainPage()
         {
             return View();
         }
 
-        public ActionResult GetInfo(int page = 1, int year = 0)
+        public ActionResult GetInfo(int page = 0, int year = 0)
         {
-            IEnumerable<WeatherData> dataPerPages = wdc.weatherDatas
+            IEnumerable<WeatherData> dataPerPages = weatherDC.weatherDatas
                 .OrderBy(x => x.Id)
                 .Skip(ListOfYears.GetAmountOfSkippedRecords(year) + ListOfYears.Years[year].GetSkippedRecordsAmount(page))
-                .Take(ListOfYears.Years[year].Months[page - 1].RecordsAmount);
+                .Take(ListOfYears.Years[year].Months[page].RecordsAmount);
             PageInfoMonth pageInfoMonth = new PageInfoMonth
             {
                 PageNumber = page,
-                PageSize = ListOfYears.Years[year].Months[page - 1].RecordsAmount,
-                TotalItems = wdc.weatherDatas.Count()
+                PageSize = ListOfYears.Years[year].Months[page].RecordsAmount,
+                TotalItems = weatherDC.weatherDatas.Count()
             };
             PageInfoYear.chosenYear = year;
-            PageInfoYear piy = new PageInfoYear() { currentYear = year };
+            PageInfoYear pageInfoYear = new PageInfoYear() { currentYear = year };
 
-            InfoViewModel ivm = new InfoViewModel { PageInfoMonth = pageInfoMonth, weather = dataPerPages, PageInfoYear = piy };
+            InfoViewModel infoViewModel = new InfoViewModel { PageInfoMonth = pageInfoMonth, weather = dataPerPages, PageInfoYear = pageInfoYear };
 
-            return View(ivm);
+            return View(infoViewModel);
         }
 
         public ActionResult Upload()
@@ -60,7 +60,7 @@ namespace Weather_Archive.Controllers
                         string path = Server.MapPath("~/ExcelArchive/" + fileName);
                         upload.SaveAs(path);
 
-                        uploading.AddingDatas(path, wdc);
+                        uploading.AddingDatas(path, weatherDC);
                     }
                     catch (Exception ex)
                     {
@@ -79,7 +79,7 @@ namespace Weather_Archive.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            wdc.Dispose();
+            weatherDC.Dispose();
             base.Dispose(disposing);
         }
     }
